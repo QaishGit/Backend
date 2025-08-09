@@ -1,7 +1,6 @@
-const http = require('http');
 const fs = require('fs');
 
-const server = http.createServer((req, res) => {
+const userRequestHandler = (req, res) => {
   console.log(req.url, req.method);
 
   if(req.url === '/'){
@@ -39,7 +38,7 @@ const server = http.createServer((req, res) => {
       const params = new URLSearchParams(fullBody);
 
       // const bodyObject = {};
-      // for(const[key, val] of params.entries()){
+      // for(const[key, val] of params.entries()){ 
       //   bodyObject[key] = val;
       // }
 
@@ -47,7 +46,7 @@ const server = http.createServer((req, res) => {
       console.log(bodyObject);
       fs.writeFileSync('user.txt', JSON.stringify(bodyObject));
     });
-    
+
     res.statusCode = 302;
     res.setHeader('Location', '/');
     return res.end();
@@ -59,9 +58,6 @@ const server = http.createServer((req, res) => {
   res.write(`<body><h1>Form Submitted</h1></body>`);
   res.write('</html>');
   res.end();
-});
+};
 
-const PORT = 3000;
-server.listen(PORT, () => {
-  console.log(`Hi! Server running on address http://localhost:${PORT}`);
-});
+module.exports = userRequestHandler;
