@@ -29,9 +29,9 @@ const server = http.createServer((req, res) => {
     });
 
     fs.writeFileSync('user.txt', 'Cash');
-    res.statusCode = 302;
-    res.setHeader('Location', '/');
-    return res.end();
+    // res.statusCode = 302;
+    // res.setHeader('Location', '/');
+    // return res.end();
   }
 
   res.setHeader('Content-Type', 'text/html');
